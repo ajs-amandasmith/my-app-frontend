@@ -1,4 +1,4 @@
-.App {
+/* .App {
   text-align: center;
 }
 
@@ -35,4 +35,42 @@
   to {
     transform: rotate(360deg);
   }
+} */
+
+.App-header {
+  text-align: center;
+  font-size: calc(20px + 2vmin);
+  font-weight: bold;
+}
+
+.Book {
+  text-align: center;
+  border: 2px dotted;
+  margin: 5px;
+  margin-bottom: 10px;
+}
+
+.Book-title {
+  font-size: calc(14px + 2vmin);
+  margin: 0px;
+}
+
+.Book-author {
+  font-size: calc(12px + 2vmin);
+  margin: 0px;
+}
+
+.Book-publisher {
+  font-size: calc(10px + 2vmin);
+  margin: 0px;
+}
+
+.Book-genre {
+  font-size: calc(8px + 2vmin);
+  margin: 0px;
+}
+
+.Book-review {
+  font-size: calc(6px + 2vmin);
+  margin: 0px;
 }

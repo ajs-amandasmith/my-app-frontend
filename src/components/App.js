@@ -19,7 +19,7 @@ function App() {
 
   return (
     <div>
-      <header>Book List</header>
+      <header className="App-header">Book List</header>
       <div>
         {status === 'loading' ? "Loading..." : 
           <Home bookData={bookData} />
