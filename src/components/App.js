@@ -21,7 +21,9 @@ function App() {
     <div>
       <header>Book List</header>
       <div>
-       <Home bookData={bookData} />
+        {status === 'loading' ? "Loading..." : 
+          <Home bookData={bookData} />
+        }
       </div>
     </div>
   )
