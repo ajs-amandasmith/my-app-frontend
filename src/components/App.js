@@ -2,6 +2,7 @@
 import '../App.css';
 import React, { useState, useEffect } from 'react';
 import Home from "./Home";
+import AddBook from "./AddBook";
 
 function App() {
   const [status, setStatus] = useState('idle');
@@ -20,6 +21,7 @@ function App() {
   return (
     <div>
       <header className="App-header">Book List</header>
+      <AddBook />
       <div>
         {status === 'loading' ? "Loading..." : 
           <Home bookData={bookData} />
