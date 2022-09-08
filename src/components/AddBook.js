@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from 'react';
 
-function AddBook() {
+function AddBook({ updateBooks}) {
   const [showAddForm, setShowAddForm] = useState(false);
   const [title, setTitle] = useState('');
   const [publisher, setPublisher] = useState('');
   const [genre, setGenre] = useState('');
+  const [selectedAuthor, setSelectedAuthor] = useState('');
   const [author, setAuthor] = useState('');
   const [authorOptions, setAuthorOptions] = useState([]);
+  const [isNewAuthor, setIsNewAuthor] = useState(false);
 
   const options = authorOptions.map(author => (
-    <option>{author.name}</option>
+    <option id={author.id}>{author.name}</option>
   ))
 
   useEffect(() => {
@@ -18,15 +20,50 @@ function AddBook() {
       .then(authors => {
         setAuthorOptions(authors);
       })
-  }, [options])
+  }, [])
 
   function handleAdd() {
     setShowAddForm(true)
   }
 
+  function addBook(author) {
+
+  }
+
+  function selectAuthor(e) {
+    console.log(e.target.value)
+    if (e.target.value === "New Author") {
+      setIsNewAuthor(true)
+    } else {
+      setIsNewAuthor(false)
+    }
+    setAuthor(e.target.value)
+  }
+
+  function addAuthor(author) {
+    setAuthorOptions([...authorOptions, author])
+  }
+
   function handleFormSubmit(e) {
     e.preventDefault();
-    console.log(e)
+
+    if (selectedAuthor === "New Author") {
+      fetch("http://localhost:9292/authors", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          name: author
+        })
+      })
+        .then(r => r.json())
+        .then(newAuthor => {
+          addAuthor(newAuthor);
+          setAuthor("");
+        })
+    }
+    updateBooks()
     setShowAddForm(false)
   }
 
@@ -58,11 +95,19 @@ function AddBook() {
           />
           <select 
             defaultValue=""
-            name="authors"
-            onChange={e => setAuthor(e.target.value)}>
+            onChange={e => selectAuthor(e)}>
               {options}
               <option>New Author</option>
           </select>
+          {isNewAuthor ? 
+            <input
+              type="text"
+              name="new-author"
+              defaultValue=''
+              onChange={e => selectAuthor(e.target.value)}
+              placeholder="Add New Author"
+            />
+            : null}
           <input type="submit"></input>
         </form>
       ) : <button onClick={handleAdd}>Add a Book</button>}
@@ -71,3 +116,4 @@ function AddBook() {
 }
 
 export default AddBook;
+

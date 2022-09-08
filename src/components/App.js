@@ -17,12 +17,16 @@ function App() {
       })
   }, [])
 
+  function updateBooks(book) {
+    console.log(book)
+  }
+
   return (
     <div>
       <header className="App-header">Book List</header>
       <div>
         {status === 'loading' ? "Loading..." : 
-          <Home bookData={bookData} />
+          <Home bookData={bookData} updateBooks={updateBooks}/>
         }
       </div>
     </div>
