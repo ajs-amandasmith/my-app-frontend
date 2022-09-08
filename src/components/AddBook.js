@@ -5,7 +5,7 @@ function AddBook({ updateBooks}) {
   const [title, setTitle] = useState('');
   const [publisher, setPublisher] = useState('');
   const [genre, setGenre] = useState('');
-  const [selectedAuthor, setSelectedAuthor] = useState('');
+  // const [selectedAuthor, setSelectedAuthor] = useState('');
   const [author, setAuthor] = useState('');
   const [authorOptions, setAuthorOptions] = useState([]);
   const [isNewAuthor, setIsNewAuthor] = useState(false);
@@ -31,7 +31,6 @@ function AddBook({ updateBooks}) {
   }
 
   function selectAuthor(e) {
-    console.log(e.target.value)
     if (e.target.value === "New Author") {
       setIsNewAuthor(true)
     } else {
@@ -47,7 +46,7 @@ function AddBook({ updateBooks}) {
   function handleFormSubmit(e) {
     e.preventDefault();
 
-    if (selectedAuthor === "New Author") {
+    if (isNewAuthor) {
       fetch("http://localhost:9292/authors", {
         method: "POST",
         headers: {
@@ -61,6 +60,7 @@ function AddBook({ updateBooks}) {
         .then(newAuthor => {
           addAuthor(newAuthor);
           setAuthor("");
+          setIsNewAuthor(false);
         })
     }
     updateBooks()
@@ -104,7 +104,7 @@ function AddBook({ updateBooks}) {
               type="text"
               name="new-author"
               defaultValue=''
-              onChange={e => selectAuthor(e.target.value)}
+              onChange={e => setAuthor(e.target.value)}
               placeholder="Add New Author"
             />
             : null}
