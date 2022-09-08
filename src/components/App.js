@@ -18,7 +18,7 @@ function App() {
   }, [])
 
   function updateBooks(book) {
-    console.log(book)
+    console.log('update book from app', book)
   }
 
   return (

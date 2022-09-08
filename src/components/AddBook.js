@@ -5,13 +5,13 @@ function AddBook({ updateBooks}) {
   const [title, setTitle] = useState('');
   const [publisher, setPublisher] = useState('');
   const [genre, setGenre] = useState('');
-  // const [selectedAuthor, setSelectedAuthor] = useState('');
   const [author, setAuthor] = useState('');
   const [authorOptions, setAuthorOptions] = useState([]);
   const [isNewAuthor, setIsNewAuthor] = useState(false);
+  const [currentOption, setCurrentOption] = useState('')
 
   const options = authorOptions.map(author => (
-    <option id={author.id}>{author.name}</option>
+    <option id={author.id} value={author.name}>{author.name}</option>
   ))
 
   useEffect(() => {
@@ -26,8 +26,29 @@ function AddBook({ updateBooks}) {
     setShowAddForm(true)
   }
 
-  function addBook(author) {
-
+  function addBook(bookAuthor) {
+    console.log('book author', bookAuthor)
+    console.log(options)
+    const option = options.find(option => option.props.value === bookAuthor)
+    console.log('option', option.props.id)
+    // post new book data
+    // fetch request with POST method
+    // sets title, publisher, genre and author
+    // updates the book state data
+    fetch("http://localhost:9292/books", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        title: title,
+        publisher: publisher,
+        genre: genre,
+        author_id: option.props.id
+      })
+    })
+      .then(r => r.json())
+      .then(book => console.log(book))
   }
 
   function selectAuthor(e) {
@@ -63,6 +84,8 @@ function AddBook({ updateBooks}) {
           setIsNewAuthor(false);
         })
     }
+    console.log('author', author)
+    addBook(author)
     updateBooks()
     setShowAddForm(false)
   }
@@ -96,8 +119,9 @@ function AddBook({ updateBooks}) {
           <select 
             defaultValue=""
             onChange={e => selectAuthor(e)}>
-              {options}
+              <option value='' disabled>Select an Author</option>
               <option>New Author</option>
+              {options}
           </select>
           {isNewAuthor ? 
             <input
