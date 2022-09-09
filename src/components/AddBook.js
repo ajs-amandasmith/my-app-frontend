@@ -43,6 +43,7 @@ function AddBook({ addNewBook, authorOptions, addAuthor }) {
       .then(r => r.json())
       .then(book => {
         addNewBook(book);
+        addAuthor(author);
         setShowAddForm(false);
         setTitle('');
         setPublisher('');

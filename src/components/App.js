@@ -23,7 +23,7 @@ function App() {
       .then(authors => {
         setAuthorOptions(authors);
       })
-  }, [])
+  }, [bookData])
 
   function removeBook(deletedBook) {
     const newBooks = bookData.filter(book => book.id !== deletedBook.id);
@@ -36,8 +36,11 @@ function App() {
   }
 
   function addAuthor(author) {
-    const newAuthors = [...authorOptions, author]
-    setAuthorOptions(newAuthors)
+    if (authorOptions.find(oldAuthor => oldAuthor.name !== author)) {
+      const newAuthors = [...authorOptions, author]
+      setAuthorOptions(newAuthors)
+    }
+    
   }
 
   return (
