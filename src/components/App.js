@@ -25,7 +25,7 @@ function App() {
       })
   }, [])
 
-  function updateBooks(book) {
+  function addNewBook(book) {
     const updatedBooks = [...bookData, book];
     setBookData(updatedBooks);
   }
@@ -42,7 +42,7 @@ function App() {
         {status === 'loading' ? "Loading..." : 
           <Home 
             bookData={bookData} 
-            updateBooks={updateBooks} 
+            addNewBook={addNewBook} 
             status={status} 
             authorOptions={authorOptions} 
             addAuthor={addAuthor}

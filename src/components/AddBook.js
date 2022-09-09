@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-function AddBook({ updateBooks, authorOptions, addAuthor }) {
+function AddBook({ addNewBook, authorOptions, addAuthor }) {
   const [showAddForm, setShowAddForm] = useState(false);
   const [title, setTitle] = useState('');
   const [publisher, setPublisher] = useState('');
@@ -42,7 +42,7 @@ function AddBook({ updateBooks, authorOptions, addAuthor }) {
     })
       .then(r => r.json())
       .then(book => {
-        updateBooks(book);
+        addNewBook(book);
         setShowAddForm(false);
         setTitle('');
         setPublisher('');
@@ -117,7 +117,7 @@ export default AddBook;
   //     })
   //   })
   //     .then(r => r.json())
-  //     .then(book => updateBooks(book))
+  //     .then(book => addNewBook(book))
   // }
 
   // This was in the submit form function before the changes happened in Sinatra
