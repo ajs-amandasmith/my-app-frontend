@@ -13,8 +13,9 @@ function Book({ book }) {
       <p className="Book-review">Review: {book.review}</p>
       {book.review ? 
         <UpdateReview />: 
-        <button></button>
+        <button>Add Review</button>
       }
+      <button>Delete Book</button>
     </div>
   )
 }

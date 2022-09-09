@@ -3,8 +3,8 @@ import React from 'react';
 function UpdateReview() {
   return (
     <div>
-      <button></button>
-      <button></button>
+      <button>Edit Review</button>
+      <button>Delete Review</button>
     </div>
 )}
 
