@@ -40,7 +40,14 @@ function App() {
       const newAuthors = [...authorOptions, author]
       setAuthorOptions(newAuthors)
     }
-    
+  }
+
+  function updateBooks(book) {
+    const books = bookData.map(oldBook => {
+      if (oldBook.id === book.id) return book;
+      return oldBook;
+    })
+    setBookData(books);
   }
 
   return (
@@ -56,6 +63,7 @@ function App() {
             addAuthor={addAuthor}
             setAuthorOptions={setAuthorOptions}
             removeBook={removeBook}
+            updateBooks={updateBooks}
           />
         }
       </div>

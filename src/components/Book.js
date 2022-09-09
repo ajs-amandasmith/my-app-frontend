@@ -1,12 +1,13 @@
 import "../App.css";
 import React from 'react';
 import UpdateReview from './UpdateReview';
+import AddReview from './AddReview';
 
-function Book({ book, removeBook }) {
-
+function Book({ book, removeBook, updateBooks }) {
+  
   function deleteBook() {
     fetch(`http://localhost:9292/books/${book.id}`, {
-      method: "DELETE"
+    method: "DELETE"
     })
       .then(r => r.json())
       .then(removeBook(book))
@@ -20,8 +21,8 @@ function Book({ book, removeBook }) {
       <h4 className="Book-genre">Genre: {book.genre}</h4>
       <p className="Book-review">Review: {book.review}</p>
       {book.review ? 
-        <UpdateReview />: 
-        <button>Add Review</button>
+        <UpdateReview book={book} />: 
+        <AddReview book={book} />
       }
       <button onClick={deleteBook}>Delete Book</button>
     </div>
