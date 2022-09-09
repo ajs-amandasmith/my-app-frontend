@@ -2,7 +2,15 @@ import "../App.css";
 import React from 'react';
 import UpdateReview from './UpdateReview';
 
-function Book({ book }) {
+function Book({ book, removeBook }) {
+
+  function deleteBook() {
+    fetch(`http://localhost:9292/books/${book.id}`, {
+      method: "DELETE"
+    })
+      .then(r => r.json())
+      .then(removeBook(book))
+  }
 
   return (
     <div className="Book">
@@ -15,7 +23,7 @@ function Book({ book }) {
         <UpdateReview />: 
         <button>Add Review</button>
       }
-      <button>Delete Book</button>
+      <button onClick={deleteBook}>Delete Book</button>
     </div>
   )
 }
