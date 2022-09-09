@@ -1,54 +1,19 @@
 import React, { useState, useEffect } from 'react';
 
-function AddBook({ updateBooks}) {
+function AddBook({ updateBooks, authorOptions, addAuthor }) {
   const [showAddForm, setShowAddForm] = useState(false);
   const [title, setTitle] = useState('');
   const [publisher, setPublisher] = useState('');
   const [genre, setGenre] = useState('');
   const [author, setAuthor] = useState('');
-  const [authorOptions, setAuthorOptions] = useState([]);
   const [isNewAuthor, setIsNewAuthor] = useState(false);
-  const [currentOption, setCurrentOption] = useState('')
 
   const options = authorOptions.map(author => (
     <option id={author.id} value={author.name}>{author.name}</option>
   ))
 
-  useEffect(() => {
-    fetch('http://localhost:9292/authors')
-      .then(r => r.json())
-      .then(authors => {
-        setAuthorOptions(authors);
-      })
-  }, [])
-
   function handleAdd() {
     setShowAddForm(true)
-  }
-
-  function addBook(bookAuthor) {
-    console.log('book author', bookAuthor)
-    console.log(options)
-    const option = options.find(option => option.props.value === bookAuthor)
-    console.log('option', option.props.id)
-    // post new book data
-    // fetch request with POST method
-    // sets title, publisher, genre and author
-    // updates the book state data
-    fetch("http://localhost:9292/books", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        title: title,
-        publisher: publisher,
-        genre: genre,
-        author_id: option.props.id
-      })
-    })
-      .then(r => r.json())
-      .then(book => console.log(book))
   }
 
   function selectAuthor(e) {
@@ -60,34 +25,29 @@ function AddBook({ updateBooks}) {
     setAuthor(e.target.value)
   }
 
-  function addAuthor(author) {
-    setAuthorOptions([...authorOptions, author])
-  }
-
   function handleFormSubmit(e) {
     e.preventDefault();
 
-    if (isNewAuthor) {
-      fetch("http://localhost:9292/authors", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          name: author
-        })
+    fetch("http://localhost:9292/books", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        title: title,
+        publisher: publisher,
+        genre: genre,
+        name: author
       })
-        .then(r => r.json())
-        .then(newAuthor => {
-          addAuthor(newAuthor);
-          setAuthor("");
-          setIsNewAuthor(false);
-        })
-    }
-    console.log('author', author)
-    addBook(author)
-    updateBooks()
-    setShowAddForm(false)
+    })
+      .then(r => r.json())
+      .then(book => {
+        updateBooks(book);
+        setShowAddForm(false);
+        setTitle('');
+        setPublisher('');
+        setGenre('');
+      })
   }
 
   return (
@@ -140,4 +100,49 @@ function AddBook({ updateBooks}) {
 }
 
 export default AddBook;
+
+// Notes for Blog Post below:
+
+ // function addBook() {
+  //   fetch("http://localhost:9292/books", {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json"
+  //     },
+  //     body: JSON.stringify({
+  //       title: title,
+  //       publisher: publisher,
+  //       genre: genre,
+  //       name: author
+  //     })
+  //   })
+  //     .then(r => r.json())
+  //     .then(book => updateBooks(book))
+  // }
+
+  // This was in the submit form function before the changes happened in Sinatra
+
+    // if (isNewAuthor) {
+    //   fetch("http://localhost:9292/authors", {
+    //     method: "POST",
+    //     headers: {
+    //       "Content-Type": "application/json"
+    //     },
+    //     body: JSON.stringify({
+    //       name: author
+    //     })
+    //   })
+    //     .then(r => r.json())
+    //     .then(newAuthor => {
+    //       addAuthor(newAuthor);
+    //       setAuthor("");
+    //       setIsNewAuthor(false);
+    //     })
+    //     .then((newAuthor) => {
+    //       addBook(newAuthor)
+    //       setShowAddForm(false)
+    //     })
+    // } else {
+      // addBook()
+    // }
 

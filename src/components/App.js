@@ -1,4 +1,3 @@
-// import logo from '../logo.svg';
 import '../App.css';
 import React, { useState, useEffect } from 'react';
 import Home from "./Home";
@@ -6,6 +5,7 @@ import Home from "./Home";
 function App() {
   const [status, setStatus] = useState('idle');
   const [bookData, setBookData] = useState([]);
+  const [authorOptions, setAuthorOptions] = useState([]);
 
   useEffect(() => {
     setStatus("loading");
@@ -17,8 +17,22 @@ function App() {
       })
   }, [])
 
+  useEffect(() => {
+    fetch('http://localhost:9292/authors')
+      .then(r => r.json())
+      .then(authors => {
+        setAuthorOptions(authors);
+      })
+  }, [])
+
   function updateBooks(book) {
-    console.log('update book from app', book)
+    const updatedBooks = [...bookData, book];
+    setBookData(updatedBooks);
+  }
+
+  function addAuthor(author) {
+    const newAuthors = [...authorOptions, author]
+    setAuthorOptions(newAuthors)
   }
 
   return (
@@ -26,32 +40,18 @@ function App() {
       <header className="App-header">Book List</header>
       <div>
         {status === 'loading' ? "Loading..." : 
-          <Home bookData={bookData} updateBooks={updateBooks}/>
+          <Home 
+            bookData={bookData} 
+            updateBooks={updateBooks} 
+            status={status} 
+            authorOptions={authorOptions} 
+            addAuthor={addAuthor}
+            setAuthorOptions={setAuthorOptions}
+          />
         }
       </div>
     </div>
   )
 }
-
-// function App() {
-//   return (
-//     <div className="App">
-//       <header className="App-header">
-//         <img src={logo} className="App-logo" alt="logo" />
-//         <p>
-//           Edit <code>src/App.js</code> and save to reload.
-//         </p>
-//         <a
-//           className="App-link"
-//           href="https://reactjs.org"
-//           target="_blank"
-//           rel="noopener noreferrer"
-//         >
-//           Learn React
-//         </a>
-//       </header>
-//     </div>
-//   );
-// }
 
 export default App;
