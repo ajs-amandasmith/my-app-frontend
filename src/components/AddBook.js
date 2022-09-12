@@ -37,7 +37,8 @@ function AddBook({ addNewBook, authorOptions, addAuthor }) {
         title: title,
         publisher: publisher,
         genre: genre,
-        name: author
+        name: author,
+        review: ''
       })
     })
       .then(r => r.json())

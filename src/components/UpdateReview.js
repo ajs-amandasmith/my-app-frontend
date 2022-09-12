@@ -8,13 +8,29 @@ function UpdateReview({ book, updateBooks }) {
     setUpdateReview(!updateReview);
   }
 
+  function deleteReview() {
+    fetch(`http://localhost:9292/books/${book.id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        review: ""
+      })
+    })
+      .then(r => r.json())
+      .then(book => {
+        updateBooks(book)
+      })
+  }
+
   return (
     <div>
       {updateReview ? 
         <Review book={book} updateBooks={updateBooks} setUpdateReview={setUpdateReview} /> :
         <button onClick={handleClick}>Edit Review</button>
       }
-      <button>Delete Review</button>
+      <button onClick={deleteReview}>Delete Review</button>
     </div>
 )}
 

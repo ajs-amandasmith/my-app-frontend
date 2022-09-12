@@ -24,20 +24,6 @@ function Review({ book, updateBooks, setUpdateReview, setAddReview }) {
 
   }
 
-  // function addReview() {
-  //   fetch(`http://localhost:9292/books/${book.id}`, {
-  //     method: "PATCH",
-  //     headers: {
-  //       "Content-Type": "application/json"
-  //     },
-  //     body: JSON.stringify({
-  //       review: "review"
-  //   })
-  //   })
-  //   updateBooks(book)
-  // }
-
-
   return (
     <div>
       <form onSubmit={submitForm}>
