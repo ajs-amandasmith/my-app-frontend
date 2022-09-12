@@ -30,6 +30,7 @@ function UpdateReview({ book, updateBooks }) {
         <Review book={book} updateBooks={updateBooks} setUpdateReview={setUpdateReview} /> :
         <button onClick={handleClick}>Edit Review</button>
       }
+      { updateReview ? <button onClick={handleClick}>Cancel</button> : null }
       <button onClick={deleteReview}>Delete Review</button>
     </div>
 )}
