@@ -74,3 +74,20 @@
   font-size: calc(6px + 2vmin);
   margin: 0px;
 }
+
+.Author {
+  text-align: center;
+  border: 2px dotted;
+  margin: 5px;
+  margin-bottom: 10px;
+}
+
+.Author-name {
+  font-size: calc(12px + 2vmin);
+  margin: 0px;
+}
+
+.Author-books {
+  font-size: calc(6px + 2vmin);
+  margin: 0px;
+}

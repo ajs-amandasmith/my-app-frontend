@@ -1,6 +1,7 @@
 import React from "react";
 import Book from "./Book";
 import AddBook from "./AddBook";
+import ShowAuthorList from "./ShowAuthorList";
 
 function Home({ 
     bookData, 
@@ -10,6 +11,8 @@ function Home({
     removeBook,
     updateBooks
   }) {
+  
+
   const displayBooks = bookData.map(book => (
     <Book key={book.id} book={book} removeBook={removeBook} updateBooks={updateBooks} />
   ))
@@ -17,6 +20,7 @@ function Home({
   return (
     <div>
       <AddBook addNewBook={addNewBook} authorOptions={authorOptions} addAuthor={addAuthor} />
+      <ShowAuthorList />
       {displayBooks}
     </div>
   )
