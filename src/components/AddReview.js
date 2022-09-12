@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Review from './Review';
 
-function AddReview({ book }) {
+function AddReview({ book, updateBooks }) {
   const [addReview, setAddReview] = useState(false);
 
   function handleClick() {
@@ -11,7 +11,7 @@ function AddReview({ book }) {
   return (
     <div>
       { addReview ?
-        <Review book={book} /> : 
+        <Review book={book} updateBooks={updateBooks} /> : 
         <button onClick={handleClick}>Add Review</button>
       }
     </div>

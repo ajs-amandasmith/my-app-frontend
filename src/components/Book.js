@@ -21,8 +21,8 @@ function Book({ book, removeBook, updateBooks }) {
       <h4 className="Book-genre">Genre: {book.genre}</h4>
       <p className="Book-review">Review: {book.review}</p>
       {book.review ? 
-        <UpdateReview book={book} />: 
-        <AddReview book={book} />
+        <UpdateReview book={book} updateBooks={updateBooks} />: 
+        <AddReview book={book} updateBooks={updateBooks} />
       }
       <button onClick={deleteBook}>Delete Book</button>
     </div>
