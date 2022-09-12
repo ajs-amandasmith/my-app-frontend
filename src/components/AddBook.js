@@ -13,7 +13,7 @@ function AddBook({ addNewBook, authorOptions, addAuthor }) {
   ))
 
   function handleAdd() {
-    setShowAddForm(true)
+    setShowAddForm(!showAddForm)
   }
 
   function selectAuthor(e) {
@@ -95,6 +95,7 @@ function AddBook({ addNewBook, authorOptions, addAuthor }) {
             />
             : null}
           <input type="submit"></input>
+          <button onClick={handleAdd}>Cancel</button>
         </form>
       ) : <button onClick={handleAdd}>Add a Book</button>}
     </div>
