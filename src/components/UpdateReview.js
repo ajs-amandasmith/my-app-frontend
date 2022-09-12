@@ -11,7 +11,7 @@ function UpdateReview({ book, updateBooks }) {
   return (
     <div>
       {updateReview ? 
-        <Review book={book} updateBooks={updateBooks} /> :
+        <Review book={book} updateBooks={updateBooks} setUpdateReview={setUpdateReview} /> :
         <button onClick={handleClick}>Edit Review</button>
       }
       <button>Delete Review</button>

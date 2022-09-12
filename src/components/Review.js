@@ -1,27 +1,41 @@
 import React, { useState } from 'react'
 
-function Review({ book, updateBooks }) {
+function Review({ book, updateBooks, setUpdateReview, setAddReview }) {
   const [review, setReview] = useState(book.review);
 
   function submitForm(e) {
     e.preventDefault();
 
-    console.log(review)
-
-  }
-
-  function addReview() {
     fetch(`http://localhost:9292/books/${book.id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        review: "review"
+        review: review
+      })
     })
-    })
-    updateBooks(book)
+      .then(r => r.json())
+      .then(book => {
+        updateBooks(book)
+        setUpdateReview(false)
+        setAddReview(false)
+      })
+
   }
+
+  // function addReview() {
+  //   fetch(`http://localhost:9292/books/${book.id}`, {
+  //     method: "PATCH",
+  //     headers: {
+  //       "Content-Type": "application/json"
+  //     },
+  //     body: JSON.stringify({
+  //       review: "review"
+  //   })
+  //   })
+  //   updateBooks(book)
+  // }
 
 
   return (
