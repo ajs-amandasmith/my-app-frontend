@@ -32,7 +32,7 @@ function App() {
       .then(authors => {
         setAuthorData(authors)
       })
-  }, [bookData])
+  }, [authorOptions])
 
   function removeBook(deletedBook) {
     const newBooks = bookData.filter(book => book.id !== deletedBook.id);
