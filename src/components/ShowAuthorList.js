@@ -1,17 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Author from "./Author";
 
 function ShowAuthorList({ authorData }) {
   const [showAuthors, setShowAuthors] = useState(false);
-  // const [authorData, setAuthorData] = useState([]);
-
-  // useEffect(() => {
-  //   fetch("http://localhost:9292/authors")
-  //     .then(r => r.json())
-  //     .then(authors => {
-  //       setAuthorData(authors)
-  //     })
-  // }, [])
 
   function handleClick() {
     setShowAuthors(!showAuthors);
