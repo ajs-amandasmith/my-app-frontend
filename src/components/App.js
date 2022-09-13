@@ -6,6 +6,7 @@ function App() {
   const [status, setStatus] = useState('idle');
   const [bookData, setBookData] = useState([]);
   const [authorOptions, setAuthorOptions] = useState([]);
+  const [authorData, setAuthorData] = useState([]);
 
   useEffect(() => {
     setStatus("loading");
@@ -22,6 +23,14 @@ function App() {
       .then(r => r.json())
       .then(authors => {
         setAuthorOptions(authors);
+      })
+  }, [bookData])
+
+  useEffect(() => {
+    fetch("http://localhost:9292/authors")
+      .then(r => r.json())
+      .then(authors => {
+        setAuthorData(authors)
       })
   }, [bookData])
 
@@ -64,6 +73,7 @@ function App() {
             setAuthorOptions={setAuthorOptions}
             removeBook={removeBook}
             updateBooks={updateBooks}
+            authorData={authorData}
           />
         }
       </div>

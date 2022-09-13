@@ -9,7 +9,8 @@ function Home({
     authorOptions, 
     addAuthor, 
     removeBook,
-    updateBooks
+    updateBooks,
+    authorData
   }) {
   
 
@@ -20,7 +21,7 @@ function Home({
   return (
     <div>
       <AddBook addNewBook={addNewBook} authorOptions={authorOptions} addAuthor={addAuthor} />
-      <ShowAuthorList />
+      <ShowAuthorList authorData={authorData} />
       {displayBooks}
     </div>
   )
