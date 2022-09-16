@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function AddBook({ addNewBook, authorOptions, addAuthor }) {
+function AddBook({ addNewBook, authorData, addAuthor }) {
   const [showAddForm, setShowAddForm] = useState(false);
   const [title, setTitle] = useState('');
   const [publisher, setPublisher] = useState('');
@@ -8,7 +8,7 @@ function AddBook({ addNewBook, authorOptions, addAuthor }) {
   const [author, setAuthor] = useState('');
   const [isNewAuthor, setIsNewAuthor] = useState(false);
 
-  const options = authorOptions.map(author => (
+  const options = authorData.map(author => (
     <option id={author.id} value={author.name}>{author.name}</option>
   ))
 
@@ -44,7 +44,7 @@ function AddBook({ addNewBook, authorOptions, addAuthor }) {
       .then(r => r.json())
       .then(book => {
         addNewBook(book);
-        addAuthor(author);
+        addAuthor(author, book);
         setShowAddForm(false);
         setTitle('');
         setPublisher('');

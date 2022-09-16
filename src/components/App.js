@@ -5,7 +5,7 @@ import Home from "./Home";
 function App() {
   const [status, setStatus] = useState('idle');
   const [bookData, setBookData] = useState([]);
-  const [authorOptions, setAuthorOptions] = useState([]);
+  // const [authorOptions, setAuthorOptions] = useState([]);
   const [authorData, setAuthorData] = useState([]);
 
   useEffect(() => {
@@ -18,13 +18,13 @@ function App() {
       })
   }, [])
 
-  useEffect(() => {
-    fetch('http://localhost:9292/authors')
-      .then(r => r.json())
-      .then(authors => {
-        setAuthorOptions(authors);
-      })
-  }, [bookData])
+  // useEffect(() => {
+  //   fetch('http://localhost:9292/authors')
+  //     .then(r => r.json())
+  //     .then(authors => {
+  //       setAuthorOptions(authors);
+  //     })
+  // }, [bookData])
 
   useEffect(() => {
     fetch("http://localhost:9292/authors")
@@ -32,7 +32,7 @@ function App() {
       .then(authors => {
         setAuthorData(authors)
       })
-  }, [authorOptions])
+  }, [])
 
   function removeBook(deletedBook) {
     const newBooks = bookData.filter(book => book.id !== deletedBook.id);
@@ -43,11 +43,23 @@ function App() {
     const updatedBooks = [...bookData, book];
     setBookData(updatedBooks);
   }
+  
 
-  function addAuthor(author) {
-    if (authorOptions.find(oldAuthor => oldAuthor.name !== author)) {
-      const newAuthors = [...authorOptions, author]
-      setAuthorOptions(newAuthors)
+  function addAuthor(author, book) {
+    const currentAuthor = authorData.find(oldAuthor => oldAuthor.name === author)
+    console.log(currentAuthor)
+
+    if (currentAuthor !== undefined) {
+      currentAuthor.books.push(book)
+      const newAuthors = authorData.map(oldAuthor => {
+        if (oldAuthor.name === currentAuthor.name) return currentAuthor;
+        return oldAuthor;
+      })
+      setAuthorData(newAuthors);
+    } else {
+      const newAuthor = {name: author, books: [book]}
+      const newAuthors = [...authorData, newAuthor];
+      setAuthorData(newAuthors);
     }
   }
 
@@ -68,9 +80,9 @@ function App() {
             bookData={bookData} 
             addNewBook={addNewBook} 
             status={status} 
-            authorOptions={authorOptions} 
+            // authorOptions={authorOptions} 
             addAuthor={addAuthor}
-            setAuthorOptions={setAuthorOptions}
+            // setAuthorOptions={setAuthorOptions}
             removeBook={removeBook}
             updateBooks={updateBooks}
             authorData={authorData}

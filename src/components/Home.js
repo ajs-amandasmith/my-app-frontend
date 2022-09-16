@@ -20,7 +20,7 @@ function Home({
 
   return (
     <div>
-      <AddBook addNewBook={addNewBook} authorOptions={authorOptions} addAuthor={addAuthor} />
+      <AddBook addNewBook={addNewBook} authorData={authorData} addAuthor={addAuthor} />
       <ShowAuthorList authorData={authorData} />
       {displayBooks}
     </div>
