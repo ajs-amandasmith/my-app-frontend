@@ -68,3 +68,20 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+# Phase 3 Project - Frontend
+
+This repository houses the frontend for my book/author project. 
+
+It uses React and keeps track of the changes made by the user in state while the backend is updataed with CRUD requests.
+
+You can run the server by using: npm run
+
+You can add a new book by clicking on "Add a Book". Include the book title, publisher, genre, and author (with a drop down).
+
+You can leave a review on each book, as well as update or delete the reivew.
+
+You can delete the book entirely.
+
+You can also show a list of current authors and the number of books there are by that author.
