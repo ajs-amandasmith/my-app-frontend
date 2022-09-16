@@ -46,26 +46,19 @@ function App() {
   }
 
   function removeAuthor(book) {
-    console.log('book', book)
-    console.log('author', book.author)
-    console.log('data', authorData)
-
     const currentAuthor = authorData.find(author => author.name === book.author.name)
 
     const updatedBooks = currentAuthor.books.filter(oldBook => oldBook.id !== book.id)
 
-    console.log('current', currentAuthor)
-    console.log('current book', updatedBooks)
     currentAuthor.books = updatedBooks;
-    console.log('new current', currentAuthor)
+
     const newAuthors = authorData.filter(author => {
       if (author.name === currentAuthor.name) return currentAuthor;
       return author;
-    })
+    }).filter(author => author.books.length > 0)
     setAuthorData(newAuthors)
   }
   
-
   function addAuthor(author, book) {
     const currentAuthor = authorData.find(oldAuthor => oldAuthor.name === author)
 
